@@ -109,11 +109,10 @@ def build_independents(df):
 
 def build_and_test_model(train_x,train_loan,test_x,test_loan):
 
-	features = ['job_admin','job_bluecollar','job_entrepeneur','job_housemaid','job_management','job_retired','job_selfemployed','job_services','job_student','job_technician','job_unemployed','job_unknown','marital_divorced','marital_married','marital_single','marital_unknown','edu_four_yr','edu_six_yr','edu_nine_yr','edu_high_school','edu_illiterate','edu_prof_crs','edu_uni','edu_unknown']
+	features = ['age','job_admin','job_bluecollar','job_entrepeneur','job_housemaid','job_management','job_retired','job_selfemployed','job_services','job_student','job_technician','job_unemployed','job_unknown','marital_divorced','marital_married','marital_single','marital_unknown','edu_four_yr','edu_six_yr','edu_nine_yr','edu_high_school','edu_illiterate','edu_prof_crs','edu_uni','edu_unknown']
 
 	model = LogisticRegression(solver='liblinear', random_state=0)
 	model.fit(train_x,train_loan)
-
 	# print the coefficients, i.e. the weight of each independent variable
 	print('coefficients: ')
 	for i in range(len(features)):
@@ -121,7 +120,7 @@ def build_and_test_model(train_x,train_loan,test_x,test_loan):
 
 	print('intercept:'.ljust(30) + str(model.intercept_[0]))
 	print('training score:'.ljust(30) + str(model.score(train_x,train_loan)))
-	print('\nclassification report:\n' + str(classification_report(train_loan, model.predict(train_x))))
+	print('\nclassification report:\n' + str(classification_report(test_loan, model.predict(test_x))))
 	print('testing score:'.ljust(30) + str(model.score(test_x,test_loan)))
 
 if __name__ == '__main__':
